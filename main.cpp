@@ -9,17 +9,16 @@ int main(int argc, char** argv) {
   map<int, pair<int, int>> bombm;
   for (int i=0; i<M; i++) {
     scanf("%d%d", &x, &y);
-    // เก็บ (x,y) ไว้ใน bombv
-    // เก็บ (key -> (x,y) ไว้ใน bombm ผมให้ key = y*N + x
+  
   }
   set<int> exploding_set;
   scanf("%d", &e);
-  // เก็บ key ของระเบิดที่ e-1 ใน bombv ไว้ใน exploding_set
+  
   while (!exploding_set.empty()) {
-    int b = *exploding_set.begin(); // เอา key ของระเบิดตัวแรกในเซตออกมา
-    exploding_set.erase(b); // ลบออกจากเซตไป
+    int b = *exploding_set.begin(); 
+    exploding_set.erase(b); 
 
-    // ไล่เก็บระเบิดตามแนวนอน (x-axis) ซ้ายไปขวา
+    
     pair<int, int> cb = bombm[b];
     int xs = max(0, cb.first-3);
     int xe = min(N-1, cb.first+3);
@@ -33,17 +32,10 @@ int main(int argc, char** argv) {
       }
     }
 
-    // ไล่เก็บระเบิดตามแนวตั้ง (y-axis) จากบนลงล่าง
-    // TODO
-    //
-
-    // ลบระเบิดออกจาก bombm ให้ขนาดในการค้นลดลง
     bombm.erase(b);
   }
 
-  //printf("bombm.size(): %ld\n", bombm.size());
   if (bombm.size()) {
-    // ไล่ดูระเบิดที่คงเหลือจากลำดับเดิม bombv
     for (int i=0; i<bombv.size(); i++) {
       int key = bombv[i].second*N + bombv[i].first;
       auto b = bombm.find(key);
